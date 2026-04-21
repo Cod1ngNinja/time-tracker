@@ -37,7 +37,3 @@ src/
   utils/
   themes/
 ```
-
-## For More Information
-- See requirements.md for detailed requirements
-- See AGENTS.md for design and architectural patterns
