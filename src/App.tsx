@@ -1,4 +1,3 @@
-import ReloadPrompt from "./ReloadPrompt";
 import {
   AppBar,
   Toolbar,
@@ -38,16 +37,14 @@ function App({ mode, setMode }: AppProps) {
   useEffect(() => {
     // fetch activities from Dexie, seed "Run" if none exist
     db.activities.toArray().then(async (results) => {
-      // If there is no activity named "Run" (case-insensitive), add one
-      const hasRun = results.some((a) => a.name.trim().toLowerCase() === "run");
-      if (!hasRun) {
+      // If there are no activities, add default "Run"
+      if (results.length === 0) {
         const defaultActivity = {
           id: crypto.randomUUID(),
           name: "Run",
           color: "#1976d2",
         };
         await db.activities.add(defaultActivity);
-        // After adding, refetch ALL activities so we update from the DB only
         setActivities(await db.activities.toArray());
       } else {
         setActivities(results);
@@ -57,7 +54,6 @@ function App({ mode, setMode }: AppProps) {
   }, [refreshSessions]);
   return (
     <>
-      <ReloadPrompt />
       <AppBar position="static" color="default">
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
