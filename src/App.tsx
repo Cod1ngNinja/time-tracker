@@ -1,3 +1,4 @@
+import ReloadPrompt from "./ReloadPrompt";
 import {
   AppBar,
   Toolbar,
@@ -29,7 +30,10 @@ function App({ mode, setMode }: AppProps) {
   const [tab, setTab] = useState(0);
   const [activities, setActivities] = useState<Activity[]>([]);
   const [sessions, setSessions] = useState<Session[]>([]);
-  const refreshSessions = useCallback(() => db.sessions.toArray().then(setSessions), []);
+  const refreshSessions = useCallback(
+    () => db.sessions.toArray().then(setSessions),
+    [],
+  );
 
   useEffect(() => {
     // fetch activities from Dexie, seed "Run" if none exist
@@ -53,6 +57,7 @@ function App({ mode, setMode }: AppProps) {
   }, [refreshSessions]);
   return (
     <>
+      <ReloadPrompt />
       <AppBar position="static" color="default">
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
@@ -86,15 +91,17 @@ function App({ mode, setMode }: AppProps) {
       <Container maxWidth="sm" sx={{ mt: 4 }}>
         {tab === 0 && (
           <Box sx={{ my: 2 }}>
-            
             {/* TimerControl will be shown here, needs activities for props */}
-            <TimerControl activities={activities} onSessionChange={refreshSessions} />
+            <TimerControl
+              activities={activities}
+              onSessionChange={refreshSessions}
+            />
             <DashboardSummary sessions={sessions} activities={activities} />
-<SessionHistory
-               activities={activities}
-               sessions={sessions}
-               refreshSessions={refreshSessions}
-             />
+            <SessionHistory
+              activities={activities}
+              sessions={sessions}
+              refreshSessions={refreshSessions}
+            />
           </Box>
         )}
         {tab === 1 && (
