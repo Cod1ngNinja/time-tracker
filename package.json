@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Cod1ngNinja.github.com/time-tracker",
+  "homepage": "https://Cod1ngNinja.github.io/time-tracker",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

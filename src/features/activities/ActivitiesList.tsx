@@ -70,6 +70,7 @@ export default function ActivitiesList(props: { refreshActivities?: () => void }
     setError(null);
     setDialogOpen(false);
     refresh();
+    if (props.refreshActivities) props.refreshActivities();
   };
 
   const handleDelete = async () => {

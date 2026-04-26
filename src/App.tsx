@@ -88,7 +88,16 @@ function App({ mode, setMode }: AppProps) {
           <Tab label="Reports" />
         </Tabs>
       </AppBar>
-      <Container maxWidth="sm" sx={{ mt: 4 }}>
+      <Container
+        maxWidth="md"
+        sx={{
+          pt: 2,
+          height: "calc(100vh - 100px)",
+          overflow: "auto",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         {tab === 0 && (
           <Box sx={{ my: 2 }}>
             {/* TimerControl will be shown here, needs activities for props */}
